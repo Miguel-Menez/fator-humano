@@ -2,7 +2,7 @@
 
 Guia curto e simples, em cartões, sobre os 5 maiores golpes da internet e como se proteger, com foco na engenharia social, a técnica por trás da maioria deles.
 
-**Página:** https://miguel-menez.github.io/fator-humano-simples/
+**Página:** https://miguel-menez.github.io/fator-humano/
 
 ## O que tem
 
