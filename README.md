@@ -22,6 +22,8 @@ O conteúdo tem foco no Brasil (Pix, boletim de ocorrência, Black Friday). A se
 - O site não tem back-end, JavaScript, cookies nem rastreadores, e não coleta dados do visitante.
 - O único recurso externo carregado é o Google Fonts. Ao carregar as fontes, o navegador faz requisições ao Google. Sem conexão, o site usa as fontes do sistema.
 - O botão “Responder a avaliação” abre um formulário externo do Google Forms em outra aba. As respostas são tratadas pelo Google e por quem criou o formulário, não por este site.
+- A página define uma Política de Segurança de Conteúdo (CSP) por meta tag: sem scripts, sem estilos inline além do hash declarado, sem iframes, sem envio de formulários e só as fontes do Google Fonts. Se o CSS mudar, o hash do `<style>` precisa ser recalculado (a política vem no topo do `index.html`).
+- Os links externos usam `rel="noopener noreferrer"` e a política de referência é `no-referrer`.
 - Os exemplos são fictícios.
 - O repositório não contém segredos. O `.gitignore` bloqueia arquivos de ambiente, chaves e caches de ferramentas.
 
