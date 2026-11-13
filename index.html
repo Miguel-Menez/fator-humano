@@ -11,11 +11,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Hanken+Grotesk:wght@400;500;600&display=swap">
 <style>
 /* Conceito: mosaico de cartões em grafite. Cartões de tamanhos diferentes, números só com contorno,
-   um cartão claro para a tese (engenharia social). Tudo visível, sem abrir nada. Aparência escura por escolha.
-   Cartões de vidro fosco deixam ver as joaninhas que passam no fundo. */
+   um cartão claro para a tese (engenharia social). Tudo visível, sem abrir nada. Aparência escura por escolha. */
 :root{
   --bg:#0b0b0c; --card:#151516; --card-2:#1d1d1f; --line:#2b2b2e; --line-2:#3c3c40;
-  --glass:rgba(21,21,22,.56); --glass-2:rgba(29,29,31,.68);
   --ink:#f4f4f4; --ink-2:#cacaca; --ink-3:#9c9c9c;
   --inv-bg:#f4f4f4; --inv-fg:#0b0b0c; --inv-mut:#454547;
   --f-display:"Archivo","Arial Black","Helvetica Neue",Arial,sans-serif;
@@ -31,38 +29,18 @@ ul,ol{padding:0;list-style:none}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .wrap{width:100%;max-width:1120px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
 
-/* joaninhas passando no fundo (só CSS) */
-header,main,footer{position:relative;z-index:1}
-.bugs{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.v{position:absolute;left:0;will-change:transform;animation:cross var(--t) linear infinite;animation-delay:var(--d)}
-.v svg{display:block;width:100%;height:auto;animation:wobble var(--w,1.7s) ease-in-out infinite alternate}
-.v1{top:15%;width:150px;--t:46s;--d:-12s;opacity:.9}
-.v2{top:50%;width:100px;--t:34s;--d:-9s;--w:1.3s;opacity:.75;animation-name:cross-back}
-.v3{top:72%;width:190px;--t:64s;--d:-38s;--w:2.1s;opacity:.85}
-.jc{fill:#cf4338;stroke:#8f2b25;stroke-width:2}
-.jl{fill:none;stroke:#1b1b1b;stroke-width:2.4;stroke-linecap:round}
-.jp{fill:#1b1b1b}
-.jb{fill:#fff;opacity:.28}
-.jh{fill:#2b2b30;stroke:#9a9aa1;stroke-width:1.6}
-.jg{fill:none;stroke:#9a9aa1;stroke-width:3;stroke-linecap:round}
-.jk{fill:#9a9aa1}
-.je{fill:#f2f2f2}
-@keyframes cross{from{transform:translateX(-200px)}to{transform:translateX(calc(100vw + 200px))}}
-@keyframes cross-back{from{transform:translateX(calc(100vw + 200px))}to{transform:translateX(-200px)}}
-@keyframes wobble{from{transform:translateY(-7px) rotate(-8deg)}to{transform:translateY(7px) rotate(8deg)}}
-
 .top{display:flex;align-items:center;gap:12px;padding-top:26px;padding-bottom:22px;font:800 13px/1 var(--f-display);font-stretch:125%;letter-spacing:.16em;text-transform:uppercase}
 .top i{display:block;width:18px;height:18px;border:2px solid var(--ink);position:relative;flex:none}
 .top i::after{content:"";position:absolute;inset:3px;background:var(--ink)}
 
 .bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px;padding-bottom:48px}
-.card{grid-column:span 4;background:var(--glass);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);border:1px solid var(--line);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:18px;transition:border-color .2s,background .2s}
-.card:hover{border-color:var(--line-2);background:var(--glass-2)}
+.card{grid-column:span 4;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:18px;transition:border-color .2s,background .2s}
+.card:hover{border-color:var(--line-2);background:var(--card-2)}
 .s5{grid-column:span 5}.s6{grid-column:span 6}.s7{grid-column:span 7}.s8{grid-column:span 8}
 
 /* tese */
 .hero{justify-content:space-between;gap:36px;padding:36px}
-.hero:hover{background:var(--glass)}
+.hero:hover{background:var(--card)}
 h1{font-family:var(--f-display);font-weight:800;font-stretch:120%;font-size:clamp(2.1rem,5.2vw,3.9rem);line-height:.98;letter-spacing:-.03em;text-transform:uppercase;text-wrap:balance}
 .lead{color:var(--ink-2);font-size:1.1rem;max-width:44ch}
 .callout{background:var(--inv-bg);color:var(--inv-fg);border-color:var(--inv-bg);justify-content:space-between;gap:32px;padding:32px}
@@ -97,51 +75,33 @@ h2{font-family:var(--f-display);font-weight:700;font-stretch:108%;font-size:1.45
 .steps li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:8px;padding:13px 0;border-top:1px solid var(--line);color:var(--ink-2);counter-increment:s}
 .steps li::before{content:"0" counter(s);font:500 13px/1.7 var(--f-mono);color:var(--ink)}
 
+.btn{display:inline-flex;align-items:center;gap:10px;width:max-content;padding:13px 22px;border-radius:999px;background:var(--ink);color:var(--bg);box-shadow:inset 0 0 0 1px var(--ink);font:600 .95rem/1.2 var(--f-sans);text-decoration:none;transition:background .2s,color .2s}
+.btn::after{content:"\2197";font-size:1.05em}
+.btn:hover{background:transparent;color:var(--ink)}
+.hero-b{display:grid;gap:22px;justify-items:start}
+.s12{grid-column:span 12}
+.cta{flex-direction:row;align-items:center;justify-content:space-between;gap:24px;padding:32px 36px}
+.cta .txt{display:grid;gap:8px}
+
 .foot{padding-bottom:56px;color:var(--ink-3);font-size:.88rem;max-width:64ch}
 
 @media (max-width:980px){
   .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
   .card,.s5,.s6,.s7{grid-column:span 1}
-  .s8,.callout{grid-column:span 2}
+  .s8,.s12,.callout{grid-column:span 2}
   .s7 .blks{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:640px){
   .bento{grid-template-columns:minmax(0,1fr);gap:12px}
-  .card,.s5,.s6,.s7,.s8,.callout{grid-column:span 1;padding:24px;border-radius:24px}
+  .card,.s5,.s6,.s7,.s8,.s12,.callout{grid-column:span 1;padding:24px;border-radius:24px}
+  .cta{flex-direction:column;align-items:flex-start;gap:18px}
   .hero{padding:28px 24px}
   .callout{padding:28px 24px}
 }
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}.bugs{display:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <defs>
-    <symbol id="joaninha" viewBox="0 0 100 100">
-      <g class="jg">
-        <line x1="36" y1="27" x2="28" y2="13"/><line x1="47" y1="24" x2="47" y2="9"/><line x1="58" y1="27" x2="66" y2="14"/>
-        <line x1="36" y1="73" x2="28" y2="87"/><line x1="47" y1="76" x2="47" y2="91"/><line x1="58" y1="73" x2="66" y2="86"/>
-        <path d="M80 42 Q86 32 93 33"/><path d="M80 58 Q86 68 93 67"/>
-      </g>
-      <g class="jk"><circle cx="94" cy="33" r="2.6"/><circle cx="94" cy="67" r="2.6"/></g>
-      <ellipse class="jc" cx="45" cy="50" rx="36" ry="32"/>
-      <path class="jl" d="M11 50 H68"/>
-      <g class="jp">
-        <circle cx="28" cy="35" r="6.5"/><circle cx="46" cy="31" r="5.5"/><circle cx="60" cy="38" r="5"/>
-        <circle cx="28" cy="65" r="6.5"/><circle cx="46" cy="69" r="5.5"/><circle cx="60" cy="62" r="5"/>
-      </g>
-      <ellipse class="jb" cx="31" cy="40" rx="9" ry="4" transform="rotate(-22 31 40)"/>
-      <circle class="jh" cx="77" cy="50" r="13"/>
-      <circle class="je" cx="82" cy="45" r="2.6"/><circle class="je" cx="82" cy="55" r="2.6"/>
-      <circle class="jp" cx="83" cy="45" r="1.1"/><circle class="jp" cx="83" cy="55" r="1.1"/>
-    </symbol>
-  </defs>
-</svg>
-<div class="bugs" aria-hidden="true">
-  <div class="v v1"><svg viewBox="0 0 100 100" focusable="false"><use href="#joaninha"/></svg></div>
-  <div class="v v2"><svg viewBox="0 0 100 100" focusable="false"><use href="#joaninha" transform="translate(100 0) scale(-1 1)"/></svg></div>
-  <div class="v v3"><svg viewBox="0 0 100 100" focusable="false"><use href="#joaninha"/></svg></div>
-</div>
 <header class="wrap top"><i aria-hidden="true"></i><span>Fator Humano</span></header>
 
 <main class="wrap">
@@ -149,7 +109,10 @@ h2{font-family:var(--f-display);font-weight:700;font-stretch:108%;font-size:1.45
 
     <section class="card s8 hero" aria-label="Apresentação">
       <h1>Os 5 maiores golpes da internet</h1>
-      <p class="lead">Como cada golpe funciona, qual é o sinal de alerta e como se proteger, em poucos cartões.</p>
+      <div class="hero-b">
+  <p class="lead">Como cada golpe funciona, qual é o sinal de alerta e como se proteger, em poucos cartões.</p>
+        <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfeJx__Thv-os2BLlw_xxCNlwO4KID8iKC91XXuGcUnq1rHTA/viewform" target="_blank" rel="noopener noreferrer">Responder a avaliação</a>
+      </div>
     </section>
 
     <section class="card callout" aria-label="Engenharia social">
@@ -226,6 +189,14 @@ h2{font-family:var(--f-display);font-weight:700;font-stretch:108%;font-size:1.45
         <li>Guarde as provas e registre um boletim de ocorrência.</li>
         <li>Denuncie na plataforma e avise seus contatos.</li>
       </ol>
+    </section>
+
+    <section class="card s12 cta" aria-label="Avaliação do trabalho">
+      <div class="txt">
+        <h2>Avalie este trabalho</h2>
+        <p class="desc">Depois de ler os cartões, responda o formulário de avaliação.</p>
+      </div>
+      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfeJx__Thv-os2BLlw_xxCNlwO4KID8iKC91XXuGcUnq1rHTA/viewform" target="_blank" rel="noopener noreferrer">Responder a avaliação</a>
     </section>
 
   </div>
