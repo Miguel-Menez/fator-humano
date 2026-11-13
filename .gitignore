@@ -1,0 +1,26 @@
+# Segredos e credenciais (nunca versionar)
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+
+# Caches e configurações locais de ferramentas
+.impeccable/
+.claude/
+.vscode/
+.idea/
+
+# Dependências, logs e temporários
+node_modules/
+*.log
+*.tmp
+*.bak
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini

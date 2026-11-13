@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="color-scheme" content="dark">
+<title>Fator Humano Simples</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+/* Conceito: mosaico de cartões em grafite. Cartões de tamanhos diferentes, números só com contorno,
+   um cartão claro para a tese (engenharia social). Tudo visível, sem abrir nada. Aparência escura por escolha. */
+:root{
+  --bg:#0b0b0c; --card:#151516; --card-2:#1d1d1f; --line:#2b2b2e; --line-2:#3c3c40;
+  --ink:#f4f4f4; --ink-2:#cacaca; --ink-3:#9c9c9c;
+  --inv-bg:#f4f4f4; --inv-fg:#0b0b0c; --inv-mut:#454547;
+  --f-display:"Archivo","Arial Black","Helvetica Neue",Arial,sans-serif;
+  --f-sans:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:ui-monospace,SFMono-Regular,"Cascadia Mono",Consolas,monospace;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f-sans);-webkit-font-smoothing:antialiased}
+h1,h2,p,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+
+.top{display:flex;align-items:center;gap:12px;padding-top:26px;padding-bottom:22px;font:800 13px/1 var(--f-display);font-stretch:125%;letter-spacing:.16em;text-transform:uppercase}
+.top i{display:block;width:18px;height:18px;border:2px solid var(--ink);position:relative;flex:none}
+.top i::after{content:"";position:absolute;inset:3px;background:var(--ink)}
+
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px;padding-bottom:48px}
+.card{grid-column:span 4;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:18px;transition:border-color .2s,background .2s}
+.card:hover{border-color:var(--line-2);background:var(--card-2)}
+.s5{grid-column:span 5}.s6{grid-column:span 6}.s7{grid-column:span 7}.s8{grid-column:span 8}
+
+/* tese */
+.hero{justify-content:space-between;gap:36px;padding:36px}
+.hero:hover{background:var(--card)}
+h1{font-family:var(--f-display);font-weight:800;font-stretch:120%;font-size:clamp(2.1rem,5.2vw,3.9rem);line-height:.98;letter-spacing:-.03em;text-transform:uppercase;text-wrap:balance}
+.lead{color:var(--ink-2);font-size:1.1rem;max-width:44ch}
+.callout{background:var(--inv-bg);color:var(--inv-fg);border-color:var(--inv-bg);justify-content:space-between;gap:32px;padding:32px}
+.callout:hover{background:var(--inv-bg);border-color:var(--inv-bg)}
+.callout .k{color:var(--inv-mut)}
+.callout h2{font-size:clamp(1.6rem,2.7vw,2.15rem);line-height:1.08}
+.callout p{color:var(--inv-mut);font-size:1rem}
+
+/* partes comuns */
+.ch{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.num{font:800 2.9rem/.9 var(--f-display);font-stretch:118%;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px var(--ink-3)}
+.tag{padding:5px 11px;border:1px solid var(--line-2);border-radius:999px;font:500 11px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.k{font:500 11px/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+h2{font-family:var(--f-display);font-weight:700;font-stretch:108%;font-size:1.45rem;line-height:1.15;letter-spacing:-.02em}
+.desc{color:var(--ink-2)}
+.blks{display:grid;gap:12px;align-items:start}
+.blk{padding:16px 18px;border-radius:18px;background:var(--bg);display:grid;gap:8px;align-content:start}
+.blk p,.blk li{font-size:.94rem;color:var(--ink-2)}
+.blk ul{display:grid;gap:8px}
+.blk li{position:relative;padding-left:16px}
+.blk li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;background:var(--ink)}
+.s7 .blks{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+/* P.A.R.E. */
+.pare{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:6px}
+.pare li{display:grid;gap:8px;align-content:start}
+.pare b{font:800 clamp(2.6rem,6vw,3.8rem)/.9 var(--f-display);font-stretch:122%;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.pare span{font-size:.88rem;line-height:1.35;color:var(--ink-2)}
+
+/* se caiu */
+.steps{display:grid;gap:0;counter-reset:s;margin-top:4px}
+.steps li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:8px;padding:13px 0;border-top:1px solid var(--line);color:var(--ink-2);counter-increment:s}
+.steps li::before{content:"0" counter(s);font:500 13px/1.7 var(--f-mono);color:var(--ink)}
+
+.foot{padding-bottom:56px;color:var(--ink-3);font-size:.88rem;max-width:64ch}
+
+@media (max-width:980px){
+  .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .card,.s5,.s6,.s7{grid-column:span 1}
+  .s8,.callout{grid-column:span 2}
+  .s7 .blks{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .bento{grid-template-columns:minmax(0,1fr);gap:12px}
+  .card,.s5,.s6,.s7,.s8,.callout{grid-column:span 1;padding:24px;border-radius:24px}
+  .hero{padding:28px 24px}
+  .callout{padding:28px 24px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="wrap top"><i aria-hidden="true"></i><span>Fator Humano</span></header>
+
+<main class="wrap">
+  <div class="bento">
+
+    <section class="card s8 hero" aria-label="Apresentação">
+      <h1>Os 5 maiores golpes da internet</h1>
+      <p class="lead">Como cada golpe funciona, qual é o sinal de alerta e como se proteger, em poucos cartões.</p>
+    </section>
+
+    <section class="card callout" aria-label="Engenharia social">
+      <span class="k">Engenharia social</span>
+      <h2>A maioria dos golpes na internet é engenharia social.</h2>
+      <p>O golpista engana você para que você mesmo abra a porta.</p>
+    </section>
+
+    <article class="card s5">
+      <div class="ch"><span class="num">01</span><span class="tag">Isca em massa</span></div>
+      <h2>Phishing</h2>
+      <p class="desc">Mensagens que imitam bancos, lojas e órgãos públicos para levar você a um site falso.</p>
+      <div class="blks">
+        <div class="blk"><span class="k">Sinal de alerta</span><p>Prazo curto e ameaça de bloqueio, com um link estranho.</p></div>
+        <div class="blk"><span class="k">Como se prevenir</span><ul><li>Não toque em links de mensagens inesperadas: abra o app oficial.</li><li>Ative a verificação em duas etapas.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="card s7">
+      <div class="ch"><span class="num">02</span><span class="tag">Golpe pessoal</span></div>
+      <h2>Perfil falso e conta clonada</h2>
+      <p class="desc">O golpe do “mudei de número”: usam a foto de alguém que você conhece e pedem dinheiro com pressa.</p>
+      <div class="blks">
+        <div class="blk"><span class="k">Sinal de alerta</span><p>Número novo, pedido de Pix urgente e nada de ligação ou vídeo.</p></div>
+        <div class="blk"><span class="k">Como se prevenir</span><ul><li>Ligue para o número antigo ou faça chamada de vídeo antes de pagar.</li><li>Nunca passe o código de 6 dígitos do WhatsApp.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="ch"><span class="num">03</span><span class="tag">Golpe por voz</span></div>
+      <h2>Falsa central</h2>
+      <p class="desc">Alguém liga dizendo ser do banco e conduz você a entregar o acesso à conta.</p>
+      <div class="blks">
+        <div class="blk"><span class="k">Sinal de alerta</span><p>Pedem senha, token ou a instalação de um aplicativo.</p></div>
+        <div class="blk"><span class="k">Como se prevenir</span><ul><li>Desligue e ligue você mesmo para o número do verso do cartão.</li><li>Banco nunca pede senha, token nem transferência para “conta segura”.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="ch"><span class="num">04</span><span class="tag">Dinheiro fácil</span></div>
+      <h2>Investimento falso</h2>
+      <p class="desc">Promessa de lucro alto e garantido, sustentada por prints e depoimentos falsos.</p>
+      <div class="blks">
+        <div class="blk"><span class="k">Sinal de alerta</span><p>Retorno garantido, poucas vagas ou taxa para sacar.</p></div>
+        <div class="blk"><span class="k">Como se prevenir</span><ul><li>Desconfie de retorno garantido: todo investimento tem risco.</li><li>Nunca pague taxa para liberar um saque.</li></ul></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="ch"><span class="num">05</span><span class="tag">Golpe de compra</span></div>
+      <h2>Loja falsa</h2>
+      <p class="desc">Sites que copiam lojas conhecidas e vendem por preços impossíveis, principalmente na Black Friday.</p>
+      <div class="blks">
+        <div class="blk"><span class="k">Sinal de alerta</span><p>Preço muito abaixo, contador regressivo e pagamento só no Pix.</p></div>
+        <div class="blk"><span class="k">Como se prevenir</span><ul><li>Compare o preço em lojas conhecidas e pesquise o CNPJ.</li><li>Prefira cartão de crédito ou virtual: dá para contestar.</li></ul></div>
+      </div>
+    </article>
+
+    <section class="card s6" aria-label="Regra de ouro">
+      <h2>Regra de ouro: P.A.R.E.</h2>
+      <ul class="pare">
+        <li><b>P</b><span>Pare antes de agir</span></li>
+        <li><b>A</b><span>Avalie quem fala</span></li>
+        <li><b>R</b><span>Reconfirme por outro canal</span></li>
+        <li><b>E</b><span>Evite compartilhar códigos</span></li>
+      </ul>
+    </section>
+
+    <section class="card s6" aria-label="Se caiu em um golpe">
+      <h2>Caiu em um golpe? Aja nesta ordem</h2>
+      <ol class="steps">
+        <li>Pare de pagar e fale com o seu banco pelo app oficial.</li>
+        <li>Troque as senhas, começando pelo e-mail.</li>
+        <li>Guarde as provas e registre um boletim de ocorrência.</li>
+        <li>Denuncie na plataforma e avise seus contatos.</li>
+      </ol>
+    </section>
+
+  </div>
+</main>
+
+<footer class="wrap"><p class="foot">Material educativo. Os exemplos são fictícios e este site não substitui a orientação do seu banco ou das autoridades.</p></footer>
+</body>
+</html>
